@@ -1,0 +1,4 @@
+﻿User-agent: *
+Allow: /
+
+Sitemap: https://adjisoft.github.io/mgtree/sitemap.xml

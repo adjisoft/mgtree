@@ -1,0 +1,308 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mgtree Documentation | Advanced Tree and fully Unix like command Compatible CLI</title>
+  <meta name="description" content="Complete documentation for mgtree, an advanced cross-platform tree command with regex filters, content search, preview, colors, icons, and ls-style options.">
+  <meta name="keywords" content="mgtree, tree command, ls compatible, cli documentation, go cli, file tree, regex search, content search">
+  <meta name="author" content="Adjisoft">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#17324d" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d1520" media="(prefers-color-scheme: dark)">
+  <link rel="canonical" href="https://adjisoft.github.io/mgtree/">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="mgtree Documentation">
+  <meta property="og:description" content="Learn how to use mgtree for tree views, regex filtering, file content search, previews, color output, and ls-style compatibility.">
+  <meta property="og:url" content="https://adjisoft.github.io/mgtree/">
+  <meta property="og:image" content="https://adjisoft.github.io/mgtree/banner.png">
+  <meta property="og:site_name" content="mgtree">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="mgtree Documentation">
+  <meta name="twitter:description" content="Complete docs for the cross-platform tree and ls-compatible CLI built with Go.">
+  <meta name="twitter:image" content="https://adjisoft.github.io/mgtree/banner.png">
+  <link rel="preload" as="image" href="banner.png">
+  <link rel="stylesheet" href="styles/site.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "mgtree",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Windows, Linux, macOS",
+    "description": "mgtree is an advanced cross-platform tree command with search, regex filtering, preview, color output, icons, and ls-style compatibility.",
+    "image": "https://adjisoft.github.io/mgtree/banner.png",
+    "url": "https://adjisoft.github.io/mgtree/",
+    "author": {
+      "@type": "Organization",
+      "name": "Adjisoft"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__brand">
+        <img src="banner.png" alt="mgtree banner" class="sidebar__logo">
+        <div>
+          <p class="eyebrow">Documentation</p>
+          <h1>mgtree</h1>
+          <p class="sidebar__tagline">Advanced tree output with search, preview, and ls-style compatibility.</p>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav" aria-label="Section navigation">
+        <a href="#overview">Overview</a>
+        <a href="#installation">Installation</a>
+        <a href="#quick-start">Quick Start</a>
+        <a href="#core-features">Core Features</a>
+        <a href="#ls-compatibility">ls Compatibility</a>
+        <a href="#flags">Flags Reference</a>
+        <a href="#examples">Examples</a>
+        <a href="#behavior">Behavior Notes</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="sidebar__actions">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle color theme">
+          <span class="theme-toggle__label">Theme</span>
+          <span class="theme-toggle__state" id="theme-label">Auto</span>
+        </button>
+      </div>
+    </aside>
+
+    <div class="page-shell">
+      <header class="mobile-header">
+        <button class="icon-button" id="sidebar-toggle" type="button" aria-expanded="false" aria-controls="sidebar">Menu</button>
+        <a class="mobile-header__title" href="#overview">mgtree Docs</a>
+        <button class="icon-button" id="mobile-theme-toggle" type="button" aria-label="Toggle color theme">Theme</button>
+      </header>
+
+      <main class="content" id="content">
+        <section class="hero" id="overview">
+          <div class="hero__copy">
+            <p class="eyebrow">Cross-platform CLI</p>
+            <h2>The tree command for people who also want search, preview, and `ls` muscle memory.</h2>
+            <p class="hero__lead">mgtree combines recursive directory views with regex filters, name and content search, live previews, colorful rendering, optional icons, and a broad set of `ls`-style flags such as `-lah`, `-aF`, `-t`, `-S`, and `-d`.</p>
+            <div class="hero__actions">
+              <a class="button button--primary" href="#quick-start">Start with examples</a>
+              <a class="button button--ghost" href="#flags">Browse flags</a>
+            </div>
+          </div>
+          <div class="hero__card" aria-label="Sample output">
+<pre><code>mgtree -lah --icons src
+
+drwxr-xr-x 4.0KB 2026-03-31 16:10 src/
+┣━ drwxr-xr-x   0B 2026-03-31 16:15 cmd/
+┃  ┗━ -rw-r--r-- 5.3KB 2026-03-31 16:15 root.go
+┣━ drwxr-xr-x   0B 2026-03-31 16:15 internal/
+┗━ -rw-r--r--  351B 2026-03-30 22:51 go.mod</code></pre>
+          </div>
+        </section>
+
+        <section id="installation">
+          <h2>Installation</h2>
+          <p>mgtree is a Go CLI project. You can run it directly from source, build a local binary, or integrate it into your own release workflow.</p>
+          <div class="card-grid">
+            <article class="card">
+              <h3>Run from source</h3>
+<pre><code>go run . --help</code></pre>
+            </article>
+            <article class="card">
+              <h3>Build a local binary</h3>
+<pre><code>go build -o mgtree .</code></pre>
+            </article>
+            <article class="card">
+              <h3>Windows binary name</h3>
+<pre><code>go build -o mgtree.exe .</code></pre>
+            </article>
+          </div>
+        </section>
+
+        <section id="quick-start">
+          <h2>Quick Start</h2>
+          <div class="steps">
+            <article>
+              <span>1</span>
+              <div>
+                <h3>Print a tree</h3>
+                <pre><code>mgtree .</code></pre>
+              </div>
+            </article>
+            <article>
+              <span>2</span>
+              <div>
+                <h3>Enable long output and human sizes</h3>
+                <pre><code>mgtree -lah</code></pre>
+              </div>
+            </article>
+            <article>
+              <span>3</span>
+              <div>
+                <h3>Search by file name</h3>
+                <pre><code>mgtree -s config</code></pre>
+              </div>
+            </article>
+            <article>
+              <span>4</span>
+              <div>
+                <h3>Search inside file contents with preview</h3>
+                <pre><code>mgtree -c "token|secret" -p 2</code></pre>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="core-features">
+          <h2>Core Features</h2>
+          <div class="card-grid">
+            <article class="card">
+              <h3>Regex filtering</h3>
+              <p>Use include and exclude regex filters to keep the output focused on exactly the files and directories you care about.</p>
+<pre><code>mgtree --regex ".*\.go$"
+mgtree --exclude "node_modules|.git"</code></pre>
+            </article>
+            <article class="card">
+              <h3>Name and content search</h3>
+              <p>Search file names with substring matching, or scan file contents with regular expressions.</p>
+<pre><code>mgtree -s auth
+mgtree -c "password|token"</code></pre>
+            </article>
+            <article class="card">
+              <h3>Preview snippets</h3>
+              <p>Preview the first useful lines of a text file, or show content snippets around the first match.</p>
+<pre><code>mgtree --preview 3
+mgtree -c handler --preview 2</code></pre>
+            </article>
+            <article class="card">
+              <h3>Visual output</h3>
+              <p>Use colors, icons, and classifier suffixes to make large trees easier to scan at a glance.</p>
+<pre><code>mgtree --icons --color
+mgtree -F -l</code></pre>
+            </article>
+          </div>
+        </section>
+
+        <section id="ls-compatibility">
+          <h2>`ls` Compatibility</h2>
+          <p>mgtree keeps its recursive tree layout, but it also accepts familiar `ls` options so you can carry over muscle memory from Unix shells.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Flag</th>
+                  <th>Meaning in mgtree</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><code>-l</code></td><td>Show long metadata columns inside the tree output.</td></tr>
+                <tr><td><code>-a</code>, <code>-A</code></td><td>Show dotfiles and dot-directories that are hidden by default.</td></tr>
+                <tr><td><code>-h</code></td><td>Print human-readable sizes such as <code>2.0KB</code> and <code>4.6MB</code>.</td></tr>
+                <tr><td><code>-t</code>, <code>-S</code>, <code>-X</code>, <code>-U</code></td><td>Sort by time, size, extension, or discovery order.</td></tr>
+                <tr><td><code>-r</code></td><td>Reverse the final sort order.</td></tr>
+                <tr><td><code>-d</code></td><td>Show the target directory itself without descending into its children.</td></tr>
+                <tr><td><code>-F</code></td><td>Add `ls`-style suffixes like <code>/</code>, <code>*</code>, and <code>@</code>.</td></tr>
+                <tr><td><code>-R</code>, <code>-1</code></td><td>Accepted for compatibility; tree output is already recursive and one item per line.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">Compatibility note: because `-h`, `-r`, and `-d` now follow `ls` conventions, mgtree-specific shorthand changed to <code>-e</code> for <code>--regex</code> and <code>-L</code> for <code>--depth</code>.</p>
+        </section>
+
+        <section id="flags">
+          <h2>Flags Reference</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Flag</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><code>-e</code>, <code>--regex</code></td><td>Include only items that match the regex.</td></tr>
+                <tr><td><code>-x</code>, <code>--exclude</code></td><td>Exclude files or directories matching the regex.</td></tr>
+                <tr><td><code>-s</code>, <code>--search</code></td><td>Search file and directory names.</td></tr>
+                <tr><td><code>-c</code>, <code>--content</code></td><td>Search inside text file contents with a regex.</td></tr>
+                <tr><td><code>-i</code>, <code>--icons</code></td><td>Force icon output.</td></tr>
+                <tr><td><code>--no-icons</code></td><td>Disable icons even when auto-detection would enable them.</td></tr>
+                <tr><td><code>-p</code>, <code>--preview</code></td><td>Show preview lines for matching or readable text files.</td></tr>
+                <tr><td><code>-L</code>, <code>--depth</code></td><td>Limit traversal depth.</td></tr>
+                <tr><td><code>--stats</code></td><td>Print scan and match statistics at the end.</td></tr>
+                <tr><td><code>--color</code>, <code>--no-color</code></td><td>Force-enable or disable ANSI colors.</td></tr>
+                <tr><td><code>--fast</code></td><td>Skip preview and content scan work.</td></tr>
+                <tr><td><code>--deep</code></td><td>Scan more aggressively and ignore the safe file-size limit.</td></tr>
+                <tr><td><code>-l</code>, <code>-a</code>, <code>-h</code>, <code>-F</code></td><td>Enable ls-style long output, hidden files, human sizes, and classifier suffixes.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="examples">
+          <h2>Examples</h2>
+          <div class="examples">
+            <article class="example">
+              <h3>Audit Go source files with long output</h3>
+<pre><code>mgtree -lah -e ".*\.go$"</code></pre>
+            </article>
+            <article class="example">
+              <h3>Search for secrets and preview nearby lines</h3>
+<pre><code>mgtree -c "password|secret|token" -p 2</code></pre>
+            </article>
+            <article class="example">
+              <h3>Sort by file size and reverse the order</h3>
+<pre><code>mgtree -Sr</code></pre>
+            </article>
+            <article class="example">
+              <h3>Show only the directory itself</h3>
+<pre><code>mgtree -d docs</code></pre>
+            </article>
+            <article class="example">
+              <h3>Skip heavy folders while searching by name</h3>
+<pre><code>mgtree -x "node_modules|.git" -s config</code></pre>
+            </article>
+            <article class="example">
+              <h3>Use icons and long mode together</h3>
+<pre><code>mgtree -liF --icons src</code></pre>
+            </article>
+          </div>
+        </section>
+
+        <section id="behavior">
+          <h2>Behavior Notes</h2>
+          <ul class="checklist">
+            <li>Dotfiles are hidden by default, just like `ls`. Use `-a` or `-A` to reveal them.</li>
+            <li>Content search scans text files only. Binary files and large files are skipped in safe mode.</li>
+            <li>The output is recursive by default. `-R` is accepted for compatibility, but it does not change the result.</li>
+            <li>Preview lines are useful for code review, config audits, and keyword hunting without leaving the tree view.</li>
+            <li>When multiple sorting flags are present, the last sort flag wins, and `-r` reverses that final order.</li>
+          </ul>
+        </section>
+
+        <section id="faq">
+          <h2>FAQ</h2>
+          <div class="faq-list">
+            <article>
+              <h3>Is mgtree only for Go projects?</h3>
+              <p>No. It is written in Go, but it works for any directory structure and any text-based source tree.</p>
+            </article>
+            <article>
+              <h3>Does mgtree replace `tree` and `ls`?</h3>
+              <p>It is designed to cover the common use cases of both: recursive structure from `tree`, plus convenient listing habits from `ls`.</p>
+            </article>
+            <article>
+              <h3>What changed because of `ls` compatibility?</h3>
+              <p>The short flags <code>-h</code>, <code>-r</code>, and <code>-d</code> now follow `ls` semantics. mgtree-specific depth and regex short flags use <code>-L</code> and <code>-e</code>.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/site.js" defer></script>
+</body>
+</html>
